@@ -135,7 +135,7 @@
               console.log(resolve,'任建');
                 // console.log('返回的数据在这儿');
               // sessionStorage.setItem('user',JSON.stringify(resolve.data.data));
-              Api.setStorageItem('user',resolve.data.data,6*60);
+              Api.setStorageItem('user',resolve.data.data,10*60);
               this.$router.push('/');
             },reject=>{
               // this.$message.error(reject.data.data)

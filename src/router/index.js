@@ -6,6 +6,7 @@ import Login from '../views/login'
 import register from '../views/register'
 import musicSearch from '../components/music-search'
 import musicMine from '../components/music-mine'
+import addPaper from '../components/add-paper'
 Vue.use(Router);
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -26,12 +27,20 @@ export default new Router({
         {
           path:'musicSearch',
           name:musicSearch,
-          component:musicSearch
+          component:musicSearch,
+          meta: {
+            keepAlive: true // 需要被缓存
+          }
         },
         {
           path:'musicMine',
           name:musicMine,
           component:musicMine
+        },
+        {
+          path:'addPaper',
+          name:addPaper,
+          component:addPaper
         }
       ]
     },

@@ -38,13 +38,19 @@
               <el-menu-item index="1-2" @click="mineMusic">我的</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-menu-item index="2">
-            <div class="item-class">
-              <i class="el-icon-menu"></i>
-              <span slot="title">导航二</span>
-            </div>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
+          <el-submenu index="2">
+            <template slot="title">
+              <div class="item-class">
+                <i class="el-icon-menu"></i>
+                <span style="font-size: 18px">问卷</span>
+              </div>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="2-1" @click="addPaper">新增问卷</el-menu-item>
+              <el-menu-item index="2-2" @click="myPaper">我的问卷</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+          <el-menu-item index="3">
             <div class="item-class">
               <i class="el-icon-document"></i>
               <span slot="title">导航三</span>
@@ -99,6 +105,12 @@
       });
     },
     methods: {
+      addPaper(){
+        this.$router.push('/index/addPaper')
+      },
+      myPaper(){
+
+      },
       logout(){
         console.log('退出');
         localStorage.removeItem("user");
