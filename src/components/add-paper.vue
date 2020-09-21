@@ -27,7 +27,7 @@
             type="textarea"
             :rows="2"
             placeholder="请输入内容"
-            v-model="textarea">
+            v-model="item.textarea">
           </el-input>
         </div>
 
@@ -90,7 +90,8 @@
               type:'文本题',
               code:3,
               title:'',
-              answer:[]
+              answer:[],
+              textarea:''
             };
             this.paper.question.push(item);
           }
@@ -100,6 +101,9 @@
 </script>
 
 <style scoped>
+  .el-menu-item-group__title{
+    padding: 0 0 7px 20px;
+  }
   .question-class{
     display: flex;
     flex-direction: column;
