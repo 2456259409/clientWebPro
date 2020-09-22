@@ -9,12 +9,15 @@
         </el-input>
         <div style="border: 1px solid #EEEEEE;margin-top: 10px"></div>
         <div class="question-class" v-for="(item , index) in paper.question" :key="index">
-          <el-input
-            style="width: 30%;margin-top: 20px;float: left;"
-            placeholder="请输入题目"
-            v-model="item.title"
-            clearable>
-          </el-input>
+          <div class="item-title-class">
+            <el-input
+              style="width: 30%;margin-top: 20px;float: left;"
+              placeholder="请输入题目"
+              v-model="item.title"
+              clearable>
+            </el-input>
+            <span style="margin-top: 28px;margin-left: 10px;color: #DD001B">{{item.type}}</span>
+          </div>
           <el-input
             v-for="(item1 , index1) in item.answer" :key="index1"
             style="width: 40%;margin-top: 5px;border: 1px solid #FFFFFF"
@@ -31,6 +34,7 @@
           </el-input>
         </div>
 
+        <el-button type="primary" @click="submitPaper" style="margin-top: 50px">提交</el-button>
         <br>
         <br>
         <br>
@@ -56,6 +60,29 @@
          }
       },
       methods:{
+        submitPaper(){
+          // console.log('任建',this.paper)
+          if(this.paper.title===''){
+            this.$alert("请填写问卷标题", '提示');
+            return;
+          }
+          let questions=this.paper.question;
+          for(let i=0;i<questions.length;i++){
+            let question=questions[i];
+            if(question.title===''){
+              this.$alert("您的第"+(i+1)+"题没有标题，请填写", '提示');
+              return;
+            }
+            if(question.code!=3){
+              for(let j=0;j<question.answer.length;j++){
+                if(question.answer[j].content===''){
+                  this.$alert("您的第"+(i+1)+"题"+(j+1)+"项没有填写，请填写!", '提示');
+                  return;
+                }
+              }
+            }
+          }
+        },
         addQues(num){
           if(num===1){
             let item={
@@ -101,8 +128,8 @@
 </script>
 
 <style scoped>
-  .el-menu-item-group__title{
-    padding: 0 0 7px 20px;
+  .item-title-class{
+    display: flex;
   }
   .question-class{
     display: flex;
