@@ -8,7 +8,8 @@
           clearable>
         </el-input>
         <div style="border: 1px solid #EEEEEE;margin-top: 10px"></div>
-        <div class="question-class" v-for="(item , index) in paper.question" :key="index">
+        <div class="question-class"  v-for="(item , index) in paper.question" :key="index" :class="{'activeItem':index==activeIndex}"
+             @mouseenter="checkOneItem(index)" @mouseleave="outOneItem()">
           <div class="item-title-class">
             <el-input
               style="width: 30%;margin-top: 20px;float: left;"
@@ -16,7 +17,7 @@
               v-model="item.title"
               clearable>
             </el-input>
-            <span style="margin-top: 28px;margin-left: 10px;color: #DD001B">{{item.type}}</span>
+            <span style="margin-top: 28px;margin-left: 10px;color: #DD001B">{{(index+1)+'.'+item.type}}</span>
           </div>
           <el-input
             v-for="(item1 , index1) in item.answer" :key="index1"
@@ -32,12 +33,16 @@
             placeholder="请输入内容"
             v-model="item.textarea">
           </el-input>
+          <div v-if="index!=activeIndex" style="height: 30px"></div>
+          <div v-if="index==activeIndex" style="height: 30px">
+            <el-button size="mini" round @click="deleteItem(index)">删除</el-button>
+            <el-button size="mini" round @click="upMove(index)">上移</el-button>
+            <el-button size="mini" round @click="downMove(index)">下移</el-button>
+          </div>
         </div>
 
         <el-button type="primary" @click="submitPaper" style="margin-top: 50px">提交</el-button>
-        <br>
-        <br>
-        <br>
+
         <div class="button-class">
           <el-button size="mini" round @click="addQues(1)">单选题</el-button>
           <el-button size="mini" round @click="addQues(2)">多选题</el-button>
@@ -49,10 +54,12 @@
 </template>
 
 <script>
+  import api from '../common/api'
     export default {
         name: "add-paper",
       data(){
           return {
+            activeIndex:-1,
             paper:{
               title:'',
               question:[]
@@ -60,6 +67,36 @@
          }
       },
       methods:{
+        upMove(index){
+          if(index===0){
+            return ;
+          }
+          let i1=this.paper.question[index];
+          this.paper.question[index]=this.paper.question[index-1];
+          this.paper.question[index-1]=i1;
+          this.activeIndex=-1;
+
+        },
+        downMove(index){
+          if(index===this.paper.question.length-1){
+            return ;
+          }
+          let i1=this.paper.question[index];
+          this.paper.question[index]=this.paper.question[index+1];
+          this.paper.question[index+1]=i1;
+          this.activeIndex=-1;
+        },
+        deleteItem(index){
+          this.paper.question.splice(index,1);
+        },
+        outOneItem(){
+          this.activeIndex=-1;
+          console.log('ok123')
+        },
+        checkOneItem(index){
+          this.activeIndex=index;
+          //console.log(item,'任建大王');
+        },
         submitPaper(){
           // console.log('任建',this.paper)
           if(this.paper.title===''){
@@ -67,6 +104,9 @@
             return;
           }
           let questions=this.paper.question;
+          if(questions.length==0){
+            this.$alert("请填写至少一道题", '提示');
+          }
           for(let i=0;i<questions.length;i++){
             let question=questions[i];
             if(question.title===''){
@@ -81,6 +121,11 @@
                 }
               }
             }
+            api.apiCall('post','/paper/addPaper',this.paper).then(resolve=>{
+
+            },reject=>{
+
+            })
           }
         },
         addQues(num){
@@ -128,6 +173,9 @@
 </script>
 
 <style scoped>
+  .activeItem{
+    background: #EEEEEE;
+  }
   .item-title-class{
     display: flex;
   }
