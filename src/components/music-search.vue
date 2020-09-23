@@ -58,7 +58,7 @@
           let data={
             keyword:this.keyword
           };
-          Api.LRapiCall('post','/user/search',data).then(resolve=>{
+          Api.apiCall('post','/user/search',data).then(resolve=>{
             this.musics=JSON.parse(resolve.data.data).data.song.list;
             console.log(this.musics)
           })

@@ -87,7 +87,7 @@ export default {
         method:method,
         url:baseUrl+url,
         data:qs.stringify(params),//,headers:{'token':innerUser.id+'||'+innerUser.salt}
-        headers:{'token':innerUser.id+'||'+innerUser.salt}
+        headers:{'token':innerUser.id+'<->'+innerUser.salt}
       }).then((response) =>{          //这里使用了ES6的语法
         let data = response.data;
         console.log(data);
