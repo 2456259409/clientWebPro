@@ -15,6 +15,7 @@
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="logout">注销</el-dropdown-item>
+            <el-dropdown-item @click.native="updateUserInfo">修改信息</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -105,6 +106,9 @@
       });
     },
     methods: {
+      updateUserInfo(){
+
+      },
       addPaper(){
         this.$router.push('/index/addPaper')
       },

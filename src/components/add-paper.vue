@@ -41,7 +41,7 @@
           </div>
         </div>
 
-        <el-button type="primary" @click="submitPaper" style="margin-top: 50px">提交</el-button>
+        <el-button type="primary" @click="submitPaper" style="margin-top: 80px">提交</el-button>
 
         <div class="button-class">
           <el-button size="mini" round @click="addQues(1)">单选题</el-button>
@@ -60,11 +60,25 @@
       data(){
           return {
             activeIndex:-1,
+            userInfo:'',
             paper:{
               title:'',
               question:[]
             }
          }
+      },
+      created(){
+        // console.log(vm);//当前组件的实例
+        let user = api.getStorageItem('user');
+        if (!user) {
+          this.$router.push('/login');
+        } else if (user === '过期') {
+          localStorage.removeItem('user');
+          this.$message.error('您的登录已经过期，请重新登录');
+          this.$router.push('/login');
+        } else {
+          this.userInfo = user;
+        }
       },
       methods:{
         upMove(index){
@@ -95,7 +109,6 @@
         },
         checkOneItem(index){
           this.activeIndex=index;
-          //console.log(item,'任建大王');
         },
         submitPaper(){
           // console.log('任建',this.paper)
@@ -121,12 +134,13 @@
                 }
               }
             }
-            api.apiCall('post','/paper/addPaper',this.paper).then(resolve=>{
-
-            },reject=>{
-
-            })
           }
+          this.paper.userId=this.userInfo.id;
+          api.apiJsonCall('post','/paper/addPaper',this.paper).then(resolve=>{
+
+          },reject=>{
+
+          })
         },
         addQues(num){
           if(num===1){
@@ -183,6 +197,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 20px;
+    margin-top: 10px;
     margin-bottom: 30px;
   }
   .paper-class{
@@ -195,7 +210,7 @@
   .button-class{
     display: flex;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 30px;
   }
 
