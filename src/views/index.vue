@@ -107,13 +107,13 @@
     },
     methods: {
       updateUserInfo(){
-
+        this.$router.push('/index/updateInfo')
       },
       addPaper(){
         this.$router.push('/index/addPaper')
       },
       myPaper(){
-
+        this.$router.push('/index/myPaper')
       },
       logout(){
         console.log('退出');

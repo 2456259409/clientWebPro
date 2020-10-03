@@ -7,6 +7,8 @@ import register from '../views/register'
 import musicSearch from '../components/music-search'
 import musicMine from '../components/music-mine'
 import addPaper from '../components/add-paper'
+import myPaper from '../components/my-paper';
+import updateInfo from '../components/update-info'
 Vue.use(Router);
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -41,6 +43,16 @@ export default new Router({
           path:'addPaper',
           name:addPaper,
           component:addPaper
+        },
+        {
+          path:'myPaper',
+          name:myPaper,
+          component:myPaper
+        },
+        {
+          path:'updateInfo',
+          name:updateInfo,
+          component:updateInfo
         }
       ]
     },
