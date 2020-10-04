@@ -42,6 +42,7 @@
         </div>
 
         <el-button type="primary" @click="submitPaper" style="margin-top: 80px">提交</el-button>
+        <el-button type="primary" @click="clearPaper" style="margin-top: 80px">清空</el-button>
 
         <div class="button-class">
           <el-button size="mini" round @click="addQues(1)">单选题</el-button>
@@ -81,6 +82,9 @@
         }
       },
       methods:{
+        clearPaper(){
+          this.paper={};
+        },
         upMove(index){
           if(index===0){
             return ;
@@ -136,8 +140,9 @@
             }
           }
           this.paper.userId=this.userInfo.id;
+          this.paper.createUsername=this.userInfo.username;
           api.apiJsonCall('post','/paper/addPaper',this.paper).then(resolve=>{
-
+            this.$message.success('提交成功');
           },reject=>{
 
           })
