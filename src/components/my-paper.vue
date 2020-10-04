@@ -30,7 +30,7 @@
       fixed="right"
       label="操作">
       <template slot-scope="scope">
-        <el-button @click="deletePaper(scope.row)" type="text" size="small">删除</el-button>
+        <el-button @click="deletePaper(scope.row,scope.row.index)" type="text" size="small">删除</el-button>
         <el-button type="text" size="small" @click="editPaper(scope.row,scope.row.index)">编辑</el-button>
       </template>
     </el-table-column>
@@ -71,7 +71,13 @@
             })
           },
           editPaper(paper){
-
+            console.log(paper.id,'大家好，我是消磨');
+            this.$router.push({
+              path:'/index/addPaper',
+              query:{
+                id:paper.id
+              }
+            })
           },
           timeComputed(time){
             let date=new Date(time).format('yyyy-MM-dd HH:mm:ss');

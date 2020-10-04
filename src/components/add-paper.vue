@@ -69,6 +69,15 @@
          }
       },
       created(){
+          let id = this.$route.query.id;
+          if(id){
+            api.apiCall('get','/paper/getById/'+id).then(resolve=>{
+              // console.log(resolve.data.data);
+              this.paper=resolve.data.data;
+            },reject=>{
+              this.$message.error('获取数据失败');
+            })
+          }
         // console.log(vm);//当前组件的实例
         let user = api.getStorageItem('user');
         if (!user) {
