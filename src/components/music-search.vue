@@ -28,8 +28,12 @@
           width="180">
         </el-table-column>
         <el-table-column
-          prop="address"
-          label="时长">
+          fixed="right"
+          label="操作">
+          <template slot-scope="scope">
+            <el-button @click="addToMine(scope.row,scope.row.index)" type="text" size="small">收藏</el-button>
+            <el-button type="text" size="small" @click="playMusic(scope.row,scope.row.index)">播放</el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -41,11 +45,17 @@
         name: "music-search",
       data(){
           return{
-            keyword:'好听的音乐',
+            keyword:'张杰',
             musics:[]
           }
       },
       methods:{
+        addToMine(music,index){
+          console.log(music,index,'任建大侠饶命啊')
+        },
+        playMusic(music,index){
+
+        },
         tableRowClassName({row, rowIndex}) {
           if (rowIndex === 1) {
             return 'warning-row';

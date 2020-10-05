@@ -34,10 +34,10 @@
                 <span style="font-size: 18px">音乐</span>
               </div>
             </template>
-            <el-menu-item-group>
+            <el-menu-group>
               <el-menu-item index="1-1" @click="searchMusic">搜索</el-menu-item>
               <el-menu-item index="1-2" @click="mineMusic">我的</el-menu-item>
-            </el-menu-item-group>
+            </el-menu-group>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
@@ -46,28 +46,28 @@
                 <span style="font-size: 18px">问卷</span>
               </div>
             </template>
-            <el-menu-item-group>
+            <el-menu-group>
               <el-menu-item index="2-1" @click="addPaper">新增问卷</el-menu-item>
               <el-menu-item index="2-2" @click="myPaper">我的问卷</el-menu-item>
-            </el-menu-item-group>
+            </el-menu-group>
           </el-submenu>
-          <el-menu-item index="3">
-            <div class="item-class">
-              <i class="el-icon-document"></i>
-              <span slot="title">导航三</span>
-            </div>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <div class="item-class">
-              <i class="el-icon-setting"></i>
-              <span slot="title">导航四</span>
-            </div>
-            <el-menu-item-group>
+          <!--<el-menu-item index="3">-->
+            <!--<div class="item-class">-->
+              <!--<i class="el-icon-document"></i>-->
+              <!--<span slot="title">导航三</span>-->
+            <!--</div>-->
+          <!--</el-menu-item>-->
+          <!--<el-menu-item index="4">-->
+            <!--<div class="item-class">-->
+              <!--<i class="el-icon-setting"></i>-->
+              <!--<span slot="title">导航四</span>-->
+            <!--</div>-->
+            <!--<el-menu-item-group>-->
 
-              <el-menu-item index="4-1">选项1</el-menu-item>
-              <el-menu-item index="4-2">选项2</el-menu-item>
-            </el-menu-item-group>
-          </el-menu-item>
+              <!--<el-menu-item index="4-1">选项1</el-menu-item>-->
+              <!--<el-menu-item index="4-2">选项2</el-menu-item>-->
+            <!--</el-menu-item-group>-->
+          <!--</el-menu-item>-->
         </el-menu>
       </el-aside>
       <el-main>

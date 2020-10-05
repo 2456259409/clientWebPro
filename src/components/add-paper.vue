@@ -26,6 +26,7 @@
             v-model="item1.content"
             clearable>
           </el-input>
+
           <el-input
             v-if="item.code==3"
             type="textarea"
@@ -41,7 +42,8 @@
           </div>
         </div>
 
-        <el-button type="primary" @click="submitPaper" style="margin-top: 80px">提交</el-button>
+        <el-button type="primary" @click="submitPaper" style="margin-top: 80px" v-if="!isEdit">提交</el-button>
+        <el-button type="primary" @click="updatePaper" style="margin-top: 80px" v-if="isEdit">修改</el-button>
         <el-button type="primary" @click="clearPaper" style="margin-top: 80px">清空</el-button>
 
         <div class="button-class">
@@ -60,6 +62,7 @@
         name: "add-paper",
       data(){
           return {
+            isEdit:false,
             activeIndex:-1,
             userInfo:'',
             paper:{
@@ -71,12 +74,18 @@
       created(){
           let id = this.$route.query.id;
           if(id){
+            this.isEdit=true;
             api.apiCall('get','/paper/getById/'+id).then(resolve=>{
               // console.log(resolve.data.data);
               this.paper=resolve.data.data;
             },reject=>{
               this.$message.error('获取数据失败');
             })
+          }else{
+            this.paper={
+              title:'',
+              question:[]
+            };
           }
         // console.log(vm);//当前组件的实例
         let user = api.getStorageItem('user');
@@ -91,6 +100,13 @@
         }
       },
       methods:{
+        updatePaper(){
+          api.apiJsonCall('post','/paper/updatePaper',this.paper).then(resolve=>{
+            this.$message.success('修改成功');
+          },reject=>{
+            this.$message.error('修改失败');
+          })
+        },
         clearPaper(){
           this.paper={};
         },
