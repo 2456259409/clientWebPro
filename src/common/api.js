@@ -1,6 +1,6 @@
 import axios from 'axios'
 import  qs from 'qs'
-const baseUrl='http://cqrjccnu.cn/api';
+const baseUrl='http://'+process.env.BASE_URL+'/api';
 const remoteUrl='http://cqrjccnu.cn/';
 var user=JSON.parse(localStorage.getItem('user'));
 // export default {
