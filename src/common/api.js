@@ -38,6 +38,13 @@ var user=JSON.parse(localStorage.getItem('user'));
 // }
 
 export default {
+  getParamsStr(params){
+    let result="?";
+    for(let key in params){
+      result+=(key+'='+params[key]+'&');
+    }
+    return result.substr(0,result.length-1);
+  },
   LRapiCall(method,url, params){
     // console.log('店家');
     if(user==null){
@@ -81,7 +88,6 @@ export default {
       user=JSON.parse(localStorage.getItem('user'));
     }
     let innerUser=user;
-    console.log('店家1',innerUser,user);
     return new Promise((resolve, reject) =>{
       axios({
         method:method,

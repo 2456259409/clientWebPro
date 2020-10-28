@@ -72,6 +72,7 @@
          }
       },
       created(){
+          //console.log('已经提交');
           let id = this.$route.query.id;
           if(id){
             this.isEdit=true;

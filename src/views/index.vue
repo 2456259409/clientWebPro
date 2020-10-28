@@ -25,6 +25,7 @@
         <el-menu
           class="el-menu-vertical-demo"
           background-color="#313743"
+          :default-active="active"
           text-color="#fff"
           active-text-color="#ffd04b">
           <el-submenu index="1">
@@ -47,8 +48,21 @@
               </div>
             </template>
             <el-menu-group>
-              <el-menu-item index="2-1" @click="addPaper">新增问卷</el-menu-item>
+              <el-menu-item index="2-1" @click="addPaper" @child-submit="changeActive">新增问卷</el-menu-item>
               <el-menu-item index="2-2" @click="myPaper">我的问卷</el-menu-item>
+            </el-menu-group>
+          </el-submenu>
+
+          <el-submenu index="3">
+            <template slot="title">
+              <div class="item-class">
+                <i class="el-icon-menu"></i>
+                <span style="font-size: 18px">图书</span>
+              </div>
+            </template>
+            <el-menu-group>
+              <el-menu-item index="3-1" @click="toAllBook">所有图书</el-menu-item>
+              <el-menu-item index="3-2">我的借阅</el-menu-item>
             </el-menu-group>
           </el-submenu>
           <!--<el-menu-item index="3">-->
@@ -86,6 +100,7 @@
     },
     data() {
       return {
+        active:'',
         userInfo: '',
         defaultIcon: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2908207382,1429820199&fm=26&gp=0.jpg'
       }
@@ -106,8 +121,15 @@
       });
     },
     methods: {
+      changeActive(data){
+        console.log('已经提交的data数据',data);
+        this.active=data;
+      },
       updateUserInfo(){
         this.$router.push('/index/updateInfo')
+      },
+      toAllBook(){
+        this.$router.push('/index/allBook')
       },
       addPaper(){
         this.$router.push('/index/addPaper')
