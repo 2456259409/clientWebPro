@@ -73,6 +73,9 @@
         this.registerForm.id=this.userInfo.id;
         this.registerForm.salt=this.userInfo.salt;
         // console.log(this.registerForm,'大家好，我是任建')
+        if(this.registerForm.username==null||this.registerForm.username===''){
+          return;
+        }
         Api.apiCall('post','/user/updateUser',this.registerForm).then(resolve=>{
           this.$message.success('修改成功');
           localStorage.removeItem("user");

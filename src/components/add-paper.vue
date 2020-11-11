@@ -186,6 +186,9 @@
                 {code:'4',content:''}
               ]
             };
+            if(this.isEdit){
+              item.paperId=this.paper.id;
+            }
             this.paper.question.push(item);
           }
           if(num===2){
@@ -200,6 +203,9 @@
                 {code:'4',content:''}
               ]
             };
+            if(this.isEdit){
+              item.paperId=this.paper.id;
+            }
             this.paper.question.push(item);
           }
           if(num===3){
@@ -210,6 +216,9 @@
               answer:[],
               textarea:''
             };
+            if(this.isEdit){
+              item.paperId=this.paper.id;
+            }
             this.paper.question.push(item);
           }
         }
