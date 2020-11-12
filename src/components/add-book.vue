@@ -125,7 +125,11 @@
                 console.log('神话来袭',this.book);
                 this.book.creatorId=this.userInfo.id;
                 Api.apiJsonCall('post','/book/add_book',this.book).then(resolve=>{
-                  console.log('哈哈哈',resolve);
+                  // console.log('哈哈哈',resolve);
+                  this.$message({
+                    message: resolve.data.msg,
+                    type: 'success'
+                  });
                 },reject=>{
                   this.$message({
                     message: reject.data.msg,

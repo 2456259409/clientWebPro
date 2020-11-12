@@ -96,7 +96,6 @@ export default {
         headers:{'token':innerUser.id+'<->'+innerUser.salt}
       }).then((response) =>{          //这里使用了ES6的语法
         let data = response.data;
-        console.log(data);
         if(data.code===200){
           resolve({
             msg:'请求成功',
@@ -160,7 +159,7 @@ export default {
   },
 
   setStorageItem(name,data,expired){
-    data.localexpired=new Date().getTime()+expired*1000;
+    data.localexpired=new Date().getTime()+expired*10000;
     localStorage.setItem(name,JSON.stringify(data));
   },
   getStorageItem(name){

@@ -133,6 +133,9 @@
       toAllBook(){
         this.$router.push('/index/allBook')
       },
+      toMyBook(){
+        this.$router.push('/index/myBook');
+      },
       toAddBook(){
         this.$router.push('/index/addBook')
       },
