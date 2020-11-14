@@ -52,6 +52,7 @@
                 <span>{{splitIntrodeceStr(props.row.introduce)}}</span>
               </el-form-item>
               <el-form-item>
+                <!--<el-button type="primary" size="small" plain @click="updateBook(props.row)">修改描述</el-button>-->
                 <el-button type="primary" size="small" plain @click="updateBook(props.row)">提交修改</el-button>
               </el-form-item>
             </el-form>
@@ -66,8 +67,15 @@
           prop="bookName">
         </el-table-column>
         <el-table-column
-          label="作者"
-          prop="author">
+          label="作者">
+          <template slot-scope="scope">
+            <el-input
+              style="width: 60%"
+              :placeholder="scope.row.author"
+              v-model="scope.row.author"
+              clearable>
+            </el-input>
+          </template>
         </el-table-column>
         <el-table-column
           fixed="right"
