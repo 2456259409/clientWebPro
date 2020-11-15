@@ -9,7 +9,6 @@ import musicMine from '../components/music-mine'
 import addPaper from '../components/add-paper'
 import myPaper from '../components/my-paper';
 import updateInfo from '../components/update-info'
-import allBook from '../components/all-book'
 import addBook from '../components/add-book'
 import myBook from '../components/my-book'
 Vue.use(Router);
@@ -46,11 +45,6 @@ export default new Router({
           path:'addPaper',
           name:addPaper,
           component:addPaper
-        },
-        {
-          path:'allBook',
-          name:allBook,
-          component:allBook
         },
         {
           path:'myBook',

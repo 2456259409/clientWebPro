@@ -62,8 +62,8 @@
             </template>
             <el-menu-group>
               <el-menu-item index="3-1" @click="toAddBook">添加图书</el-menu-item>
-              <el-menu-item index="3-4" @click="toMyBook">我的图书</el-menu-item>
-              <el-menu-item index="3-2" @click="toAllBook"  v-if="userInfo.id==10">所有图书</el-menu-item>
+              <el-menu-item index="3-4" @click="toMyBook">所有图书</el-menu-item>
+              <!--<el-menu-item index="3-2" @click="toAllBook"  v-if="userInfo.id==10">所有图书</el-menu-item>-->
               <el-menu-item index="3-3">我的借阅</el-menu-item>
             </el-menu-group>
           </el-submenu>
