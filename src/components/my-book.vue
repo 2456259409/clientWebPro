@@ -23,6 +23,14 @@
                 </el-input>
                 <!--<span>{{ props.row.bookName }}</span>-->
               </el-form-item>
+              <el-form-item label="书籍作者:">
+                <el-input
+                  :placeholder="props.row.author"
+                  v-model="props.row.author"
+                  clearable>
+                </el-input>
+                <!--<span>{{ props.row.bookName }}</span>-->
+              </el-form-item>
               <el-form-item label="书籍库存:">
                 <el-input
                   :placeholder="props.row.count"
@@ -32,7 +40,8 @@
                 <!--<span>{{ props.row.bookName }}</span>-->
               </el-form-item>
               <el-form-item label="书籍类别:">
-                <span>{{ props.row.category }}</span>
+                <template v-for="(item,index) in props.row.types"><span style="margin-right: 15px;color: #24ADF3;">{{item.name}}</span></template>
+                <!--<span></span>-->
               </el-form-item>
               <el-form-item label="创建时间:">
 
@@ -40,7 +49,7 @@
               </el-form-item>
               <el-form-item label="下架时间:">
                 <el-date-picker
-                  style="width: 100%;"
+                  style="width: 95%;"
                   type="datetime"
                   v-model="props.row.deadline"
                   :placeholder="timeComputed(props.row.deadline)"
@@ -53,7 +62,11 @@
               </el-form-item>
               <el-form-item>
                 <!--<el-button type="primary" size="small" plain @click="updateBook(props.row)">修改描述</el-button>-->
-                <el-button type="primary" size="small" plain @click="updateBook(props.row)">提交修改</el-button>
+                <el-button type="primary" size="small" plain @click="updateBook(props.row)" style="margin-left: 100px">提交修改</el-button>
+              </el-form-item>
+              <el-form-item>
+                <!--<el-button type="primary" size="small" plain @click="updateBook(props.row)">修改描述</el-button>-->
+                <el-button type="primary" size="small" plain @click="updateBookIntroduce(props.row)" style="margin-left: 100px">修改描述</el-button>
               </el-form-item>
             </el-form>
           </template>
@@ -67,15 +80,16 @@
           prop="bookName">
         </el-table-column>
         <el-table-column
-          label="作者">
-          <template slot-scope="scope">
-            <el-input
-              style="width: 60%"
-              :placeholder="scope.row.author"
-              v-model="scope.row.author"
-              clearable>
-            </el-input>
-          </template>
+          label="作者"
+          prop="author">
+          <!--<template slot-scope="scope">-->
+            <!--<el-input-->
+              <!--style="width: 60%"-->
+              <!--:placeholder="scope.row.author"-->
+              <!--v-model="scope.row.author"-->
+              <!--clearable>-->
+            <!--</el-input>-->
+          <!--</template>-->
         </el-table-column>
         <el-table-column
           fixed="right"
@@ -86,6 +100,13 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-dialog title="修改书籍介绍" :visible.sync="dialogFormVisible" style="width: 60%;margin: 0 auto;">
+        <el-input type="textarea" v-model="oneBook.introduce"></el-input>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -100,7 +121,27 @@
         isEditIntroduce:false,
         keyword: '',
         userInfo:'',
-        books:[]
+        books:[],
+        oneBook:'',
+        dialogFormVisible:false,
+        types:[
+          {
+            id:1,
+            name:'科幻小说'
+          },
+          {
+            id:2,
+            name:'玄幻小说'
+          },
+          {
+            id:3,
+            name:'传统文学'
+          },
+          {
+            id:4,
+            name:'外国名著'
+          }
+        ]
       }
     },
     created() {
@@ -109,9 +150,13 @@
         this.$router.push('/login');
         return ;
       }
-      document.getElementById('allbooks').click();
+      // document.getElementById('allbooks').click();
     },
     methods: {
+      updateBookIntroduce(item){
+        this.oneBook=item;
+        this.dialogFormVisible=true;
+      },
       throughBook(id){
         this.$confirm('是否通过该书审核?', '提示', {
           confirmButtonText: '确定',
@@ -144,7 +189,7 @@
 
       },
       updateBook(book){
-        console.log('任建来了',book);
+        // console.log('任建来了',book);
         Api.apiJsonCall('post','/book/update_book',book).then(resolve=>{
           this.$message({
             message: resolve.data.data,
@@ -155,7 +200,7 @@
         })
       },
       deleteBook(id){
-        console.log('这是书籍id',id);
+        // console.log('这是书籍id',id);
         Api.apiCall('get','/book/delete_book?id='+id).then(resolve=>{
           this.$message({
             message: resolve.data.data,
@@ -187,7 +232,32 @@
         };
         let params=qs.stringify(data);
         Api.apiCall('get','/book/get_books?'+params,data).then(resolve=>{
-          this.books=resolve.data.data;
+          let books=resolve.data.data;
+          console.log(books);
+
+          // console.log(JSON.parse(books[4].strTypes),'任建大王');
+          books.forEach((item,index)=>{
+            let types=[];
+            let t=[];
+            t=JSON.parse(item.strTypes);
+            // console.log(t,'天地小');
+            if(t!=null){
+              t.forEach((item1,index1)=>{
+                this.types.forEach((item2,index2)=>{
+                  if(item2.id===item1){
+                    types.push({
+                      id:item2.id,
+                      name:item2.name
+                    });
+                  }
+                })
+              });
+            }
+            item.types=types;
+            // console.log(types,'天地大');
+          });
+          this.books=books;
+
         },reject=>{
           console.log(reject.msg);
         })
