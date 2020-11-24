@@ -121,18 +121,19 @@ export default {
     });
   },
   apiJsonCall(method,url, params){
-    console.log('店家');
+    // console.log('店家');
     if(user==null){
       user=JSON.parse(localStorage.getItem('user'));
     }
     let innerUser=user;
-    console.log('店家1',innerUser,user);
+    // console.log('店家1',innerUser,user);
     return new Promise((resolve, reject) =>{
       axios({
         method:method,
         url:baseUrl+url,
         data:JSON.stringify(params),//,headers:{'token':innerUser.id+'||'+innerUser.salt}
         headers:{'token':innerUser.id+'<->'+innerUser.salt,
+          'type':'back-end',
                  'Content-Type':'application/json'}
       }).then((response) =>{          //这里使用了ES6的语法
         let data = response.data;
