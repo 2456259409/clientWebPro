@@ -124,8 +124,7 @@
       async formSubmit(formName){
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log(this.loginForm.username);
-            console.log(this.loginForm.password);
+
             console.log('数据进入后台验证');
             let params={
               username:this.loginForm.username,
