@@ -12,6 +12,8 @@ import updateInfo from '../components/update-info'
 import addBook from '../components/add-book'
 import myBook from '../components/my-book'
 import fillResult from '../components/file-result'
+import backUser from '../components/back-user'
+import mobileUser from '../components/mobile-user'
 Vue.use(Router);
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -41,6 +43,16 @@ export default new Router({
           path:'musicMine',
           name:musicMine,
           component:musicMine
+        },
+        {
+          path:'backUser',
+          name:backUser,
+          component:backUser
+        },
+        {
+          path:'mobileUser',
+          name:mobileUser,
+          component:mobileUser
         },
         {
           path:'addPaper',

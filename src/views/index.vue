@@ -65,7 +65,21 @@
               <el-menu-item index="3-1" @click="toAddBook">添加图书</el-menu-item>
               <el-menu-item index="3-4" @click="toMyBook">所有图书</el-menu-item>
               <!--<el-menu-item index="3-2" @click="toAllBook"  v-if="userInfo.id==10">所有图书</el-menu-item>-->
-              <el-menu-item index="3-3">我的借阅</el-menu-item>
+              <!--<el-menu-item index="3-3">我的借阅</el-menu-item>-->
+            </el-menu-group>
+          </el-submenu>
+          <el-submenu index="4" v-if="userInfo.id==10">
+            <template slot="title">
+              <div class="item-class">
+                <i class="el-icon-menu"></i>
+                <span style="font-size: 18px">用户</span>
+              </div>
+            </template>
+            <el-menu-group>
+              <el-menu-item index="4-1" @click="toBackUser">后台用户</el-menu-item>
+              <el-menu-item index="4-2" @click="toMobileUser">移动用户</el-menu-item>
+              <!--<el-menu-item index="3-2" @click="toAllBook"  v-if="userInfo.id==10">所有图书</el-menu-item>-->
+              <!--<el-menu-item index="3-3">我的借阅</el-menu-item>-->
             </el-menu-group>
           </el-submenu>
           <!--<el-menu-item index="3">-->
@@ -124,6 +138,12 @@
       });
     },
     methods: {
+      toBackUser(){
+        this.$router.push('/index/backUser')
+      },
+      toMobileUser(){
+        this.$router.push('/index/mobileUser')
+      },
       changeActive(data){
         console.log('已经提交的data数据',data);
         this.active=data;
