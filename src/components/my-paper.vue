@@ -32,6 +32,7 @@
       <template slot-scope="scope">
         <el-button @click="deletePaper(scope.row,scope.row.index)" type="text" size="small">删除</el-button>
         <el-button type="text" size="small" @click="editPaper(scope.row,scope.row.index)">编辑</el-button>
+        <el-button type="text" size="small" @click="fillResult(scope.row)">填写情况</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -59,6 +60,15 @@
   export default {
         name: "my-paper",
         methods: {
+          fillResult(item){
+            this.$router.push({
+              path:'/index/fillResult',
+              query:{
+                id:item.id
+              }
+            });
+
+          },
           deletePaper(paper,index){
             Api.apiCall('get','/paper/deletePaper/'+paper.id).then(resolve=>{
               console.log(resolve,'大王来了');
@@ -71,7 +81,7 @@
             })
           },
           editPaper(paper){
-            console.log(paper.id,'大家好，我是消磨');
+            // console.log(paper.id,'大家好，我是消磨');
             this.$router.push({
               path:'/index/addPaper',
               query:{

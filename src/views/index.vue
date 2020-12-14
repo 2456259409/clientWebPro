@@ -50,6 +50,7 @@
             <el-menu-group>
               <el-menu-item index="2-1" @click="addPaper" @child-submit="changeActive">新增问卷</el-menu-item>
               <el-menu-item index="2-2" @click="myPaper">我的问卷</el-menu-item>
+              <!--<el-menu-item index="2-3" @click="fillResult">填写情况</el-menu-item>-->
             </el-menu-group>
           </el-submenu>
 

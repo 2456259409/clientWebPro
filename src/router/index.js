@@ -11,6 +11,7 @@ import myPaper from '../components/my-paper';
 import updateInfo from '../components/update-info'
 import addBook from '../components/add-book'
 import myBook from '../components/my-book'
+import fillResult from '../components/file-result'
 Vue.use(Router);
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -50,6 +51,11 @@ export default new Router({
           path:'myBook',
           name:myBook,
           component:myBook
+        },
+        {
+          path:'fillResult',
+          name: fillResult,
+          component: fillResult
         },
         {
           path:'addBook',
