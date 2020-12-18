@@ -137,7 +137,8 @@
               Api.setStorageItem('user',resolve.data.data,10*60);
               this.$router.push('/');
             },reject=>{
-              this.$message.error(reject.data.data)
+              console.log(reject);
+              this.$message.error(reject.data.msg);
             })
             // console.log(result,'任建');
 

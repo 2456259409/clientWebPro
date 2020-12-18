@@ -80,7 +80,8 @@
               // console.log(resolve.data.data);
               this.paper=resolve.data.data;
             },reject=>{
-              this.$message.error('获取数据失败');
+              console.log(reject);
+              this.$message.error(reject.data.msg);
             })
           }else{
             this.paper={
@@ -105,7 +106,8 @@
           api.apiJsonCall('post','/paper/updatePaper',this.paper).then(resolve=>{
             this.$message.success('修改成功');
           },reject=>{
-            this.$message.error('修改失败');
+            console.log(reject);
+            this.$message.error(reject.data.msg);
           })
         },
         clearPaper(){
@@ -170,7 +172,8 @@
           api.apiJsonCall('post','/paper/addPaper',this.paper).then(resolve=>{
             this.$message.success('提交成功');
           },reject=>{
-
+            console.log(reject);
+            this.$message.error(reject.data.msg);
           })
         },
         addQues(num){

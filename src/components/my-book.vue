@@ -240,7 +240,6 @@
             let types=[];
             let t=[];
             t=JSON.parse(item.strTypes);
-            // console.log(t,'天地小');
             if(t!=null){
               t.forEach((item1,index1)=>{
                 this.types.forEach((item2,index2)=>{
@@ -254,12 +253,12 @@
               });
             }
             item.types=types;
-            // console.log(types,'天地大');
           });
           this.books=books;
 
         },reject=>{
-          console.log(reject.msg);
+          console.log(reject);
+          this.$message.error(reject.data.msg);
         })
       }
     }
