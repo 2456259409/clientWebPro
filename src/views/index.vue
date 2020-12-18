@@ -169,6 +169,7 @@
       logout(){
         console.log('退出');
         localStorage.removeItem("user");
+        Api.setStorageItem();
         this.$router.push('/login')
       },
       searchMusic(){

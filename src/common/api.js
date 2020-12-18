@@ -162,6 +162,10 @@ export default {
   },
 
   setStorageItem(name,data,expired){
+    if(name===''||name==null){
+      user=null;
+      return;
+    }
     data.localexpired=new Date().getTime()+expired*10000;
     localStorage.setItem(name,JSON.stringify(data));
   },
