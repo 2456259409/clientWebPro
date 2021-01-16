@@ -3,6 +3,12 @@
     :data="tableData"
     border
     style="width: 80%;margin: 0 auto">
+        <el-table-column
+          fixed
+          prop="id"
+          label="编号"
+          width="100">
+        </el-table-column>
 
     <el-table-column
       prop="createUsername"
