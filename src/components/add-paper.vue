@@ -1,5 +1,58 @@
 <template>
     <div style="width: 100%;">
+            <div class="paper-class">
+              <el-input
+                style="width: 30%;padding: 0 auto;margin-top: 10px"
+                placeholder="请输入标题"
+                v-model="paper.title"
+                clearable>
+              </el-input>
+              <div style="border: 1px solid #EEEEEE;margin-top: 10px"></div>
+              <div class="question-class"  v-for="(item , index) in paper.question" :key="index" :class="{'activeItem':index==activeIndex}"
+                   @mouseenter="checkOneItem(index)" @mouseleave="outOneItem()">
+                <div class="item-title-class">
+                  <el-input
+                    style="width: 30%;margin-top: 20px;float: left;"
+                    placeholder="请输入题目"
+                    v-model="item.title"
+                    clearable>
+                  </el-input>
+                  <span style="margin-top: 28px;margin-left: 10px;color: #DD001B">{{(index+1)+'.'+item.type}}</span>
+                </div>
+                <el-input
+                  v-for="(item1 , index1) in item.answer" :key="index1"
+                  style="width: 40%;margin-top: 5px;border: 1px solid #FFFFFF"
+                  :placeholder="'选项'+item1.code"
+                  v-model="item1.content"
+                  clearable>
+                </el-input>
+
+                <el-input
+                  v-if="item.code==3"
+                  type="textarea"
+                  :rows="2"
+                  placeholder="请输入内容"
+                  v-model="item.textarea">
+                </el-input>
+                <div v-if="index!=activeIndex" style="height: 30px"></div>
+                <div v-if="index==activeIndex" style="height: 30px">
+                  <el-button size="mini" round @click="deleteItem(index)">删除</el-button>
+                  <el-button size="mini" round @click="upMove(index)">上移</el-button>
+                  <el-button size="mini" round @click="downMove(index)">下移</el-button>
+                </div>
+              </div>
+
+              <el-button type="primary" @click="submitPaper" style="margin-top: 80px" v-if="!isEdit">提交</el-button>
+              <el-button type="primary" @click="updatePaper" style="margin-top: 80px" v-if="isEdit">修改</el-button>
+              <el-button type="primary" @click="clearPaper" style="margin-top: 80px">清空</el-button>
+
+              <div class="button-class">
+                <el-button size="mini" round @click="addQues(1)">单选题</el-button>
+                <el-button size="mini" round @click="addQues(2)">多选题</el-button>
+                <el-button size="mini" round @click="addQues(3)">文本题</el-button>
+            </div>
+
+            </div>
 
     </div>
 </template>
